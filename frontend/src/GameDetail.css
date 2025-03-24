@@ -1,0 +1,52 @@
+.game-detail-container {
+  padding: 20px 10%; /* Use percentage for responsive padding */
+  overflow-y: scroll;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  overflow: hidden;
+  margin: 0 auto; /* Center the container */
+  font-size: 14px; /* Reduce font size slightly */
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.game-detail-container::-webkit-scrollbar {
+  width: 0; /* For Chrome, Safari, and Opera */
+  height: 0; /* For Chrome, Safari, and Opera */
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  max-width: 90%; /* Set the maximum width to match the image width */
+  flex-wrap: wrap; /* Ensure the content wraps if it exceeds the width */
+}
+
+.gray-text {
+  color: #A9A9A9; /* Light gray color */
+}
+
+.game-image {
+  max-width: 150%;
+  width: 100%;
+  height: auto;
+  border-radius: 10px; /* Add border-radius for rounded corners */
+  display: block;
+  margin: 0 auto; /* Center the image */
+}
+
+.game-title {
+  text-align: center;
+  margin-top: 10px;
+  max-width: 90%;
+}
+
+.game-requirements {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
