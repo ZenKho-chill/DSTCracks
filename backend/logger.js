@@ -1,7 +1,7 @@
 const { Client, GatewayIntentBits } = require('discord.js');
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
-const DISCORD_TOKEN = 'MTMyMzIwNDUwNDUzMDg0NTY5OQ.GPlOfl.CorkA9EMOjoSZJkpiWJgcO-LjT8c-V-LVbThp4';
+const DISCORD_TOKEN = 'MTMyMzIwNDUwNDUzMDg0NTY5OQ.G0KGh3.YQcS4CcW6-gOq9AEttbjJ-RqZLs6CGlYzZImkM';
 
 // Define different channel IDs for different log types
 const LOG_CHANNELS = {
