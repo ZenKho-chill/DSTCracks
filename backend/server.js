@@ -43,7 +43,7 @@ const server = http.createServer(app); // Create HTTP server
 const wss = new WebSocket.Server({ server }); // Create WebSocket server
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
-const DISCORD_TOKEN = 'MTM5NzU3MzM2MzUwOTEwMDc1NQ.G3QaJF.OQ5eCUXyCsK9fhwhMdASxt_2YquP7EPcf2QaUI';
+const DISCORD_TOKEN = '';
 const LOG_CHANNEL_ID = '1323203413437055051';
 
 discordClient.once('ready', () => {
