@@ -1,7 +1,7 @@
 const { Client, GatewayIntentBits } = require('discord.js');
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
-const DISCORD_TOKEN = 'MTMyMzIwNDUwNDUzMDg0NTY5OQ.G0KGh3.YQcS4CcW6-gOq9AEttbjJ-RqZLs6CGlYzZImkM';
+const DISCORD_TOKEN = 'MTM5NzU3MzM2MzUwOTEwMDc1NQ.G3QaJF.OQ5eCUXyCsK9fhwhMdASxt_2YquP7EPcf2QaUI';
 
 // Define different channel IDs for different log types
 const LOG_CHANNELS = {
@@ -101,7 +101,7 @@ function logChangedPassword(username, userId) {
 
 function logAddedGame(username, gameName, gameImageUrl) {
   const timestamp = formatTimestamp(new Date());
-  const logMessage = `**Added Game**\n**Username:** ${username}\n**Game Name:** ${gameName}\n**Timestamp:** ${timestamp}\n**Image:**\nhttps://backend.dstcracks.site/${gameImageUrl}`;
+  const logMessage = `**Added Game**\n**Username:** ${username}\n**Game Name:** ${gameName}\n**Timestamp:** ${timestamp}\n**Image:**\nhttp://localhost:5000/${gameImageUrl}`;
   logToDiscord(LOG_CHANNELS.addedGame, logMessage);
   // Log an error if the bot does not notify
   setTimeout(() => {

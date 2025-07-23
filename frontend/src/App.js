@@ -20,7 +20,7 @@ function App() {
   let dropdownTimeout;
 
   useEffect(() => {
-    axios.get('https://backend.dstcracks.site/games')
+    axios.get('http://localhost:5000/games')
       .then(response => {
         const sortedGames = response.data.sort((a, b) => b.id - a.id);
         setGames(sortedGames);
@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     const token = Cookies.get('token');
     if (token) {
-      fetch('https://backend.dstcracks.site/user-info', {
+      fetch('http://localhost:5000/user-info', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -159,7 +159,7 @@ document.addEventListener('contextmenu', (event) => {
   };
 
   const handleImageUrl = (url) => {
-    const baseUrl = 'https://backend.dstcracks.site/';
+    const baseUrl = 'http://localhost:5000/';
     while (url.includes(baseUrl + baseUrl)) {
       url = url.replace(baseUrl, '');
     }
@@ -253,7 +253,7 @@ document.addEventListener('contextmenu', (event) => {
           <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
             {userAvatar ? (
               <>
-                <img draggable="false" src={`https://backend.dstcracks.site/${userAvatar}`} alt="Avatar Người Dùng" style={{ width: '35px', height: '35px', borderRadius: '50%', cursor: 'pointer' }} onClick={handleAvatarClick} />
+                <img draggable="false" src={`http://localhost:5000/${userAvatar}`} alt="Avatar Người Dùng" style={{ width: '35px', height: '35px', borderRadius: '50%', cursor: 'pointer' }} onClick={handleAvatarClick} />
                 <span style={{ marginLeft: '10px', fontSize: '14px', fontFamily: 'Quicksand, sans-serif', fontWeight: 'bold', cursor: 'pointer' }}>{username}</span> {/* Hiển thị tên người dùng */}
                 {showDropdown && (
                   <div style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: '#fff', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '10px', zIndex: 1, width: '150px' }}>
@@ -348,7 +348,7 @@ document.addEventListener('contextmenu', (event) => {
       <div className="game-list" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         {currentGames.map((game, index) => (
           <div key={index} className="game-item" style={{ border: '1px solid #ccc', padding: '10px', margin: '20px', borderRadius: '8px', backgroundColor: '#fff', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', width: '320px', height: '220px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', transition: 'transform 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'} onClick={() => handleGameClick(game.id)}>
-            <img draggable="false" src={handleImageUrl(game.image_url.startsWith('data:image/') ? game.image_url : `https://backend.dstcracks.site/${game.image_url}`)} alt={game.name} style={{ width: '300px', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
+            <img draggable="false" src={handleImageUrl(game.image_url.startsWith('data:image/') ? game.image_url : `http://localhost:5000/${game.image_url}`)} alt={game.name} style={{ width: '300px', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
             <h2 style={{ margin: '0', transition: 'color 0.3s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '280px' }} onMouseEnter={(e) => { e.currentTarget.style.color = '#0674ec'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'black'; }}>{game.name}</h2>
           </div>
         ))}

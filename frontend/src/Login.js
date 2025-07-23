@@ -109,7 +109,7 @@ document.addEventListener('contextmenu', (event) => {
     });
 
     try {
-      const response = await fetch('https://backend.dstcracks.site/login', {
+      const response = await fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -173,7 +173,7 @@ document.addEventListener('contextmenu', (event) => {
                 // Bắt đầu kiểm tra trạng thái xác minh mỗi 5 giây
                 const intervalId = setInterval(async () => {
                   try {
-                    const checkResponse = await fetch(`https://backend.dstcracks.site/check-verification/${email}`);
+                    const checkResponse = await fetch(`http://localhost:5000/check-verification/${email}`);
                     const data = await checkResponse.json();
                     if (data.verified) {
                       clearInterval(intervalId);
@@ -224,7 +224,7 @@ document.addEventListener('contextmenu', (event) => {
 
   const handleResendVerification = async () => {
     try {
-      const response = await fetch('https://backend.dstcracks.site/resend-verification', {
+      const response = await fetch('http://localhost:5000/resend-verification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -306,7 +306,7 @@ document.addEventListener('contextmenu', (event) => {
               </div>
               <div className="form-group">
                 <ReCAPTCHA
-                  sitekey="6LcWM5EqAAAAALjZNid2ubwYteboafM8T6cD-mI9"
+                  sitekey="6LdVAo0rAAAAAL1YQ5gO8rCLtxVjCgcF6hp2tZiv"
                   onChange={handleRecaptchaChange}
                   onExpired={handleRecaptchaExpired}
                 />

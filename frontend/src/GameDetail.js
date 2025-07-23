@@ -18,7 +18,7 @@ function GameDetail() {
   let dropdownTimeout;
 
   useEffect(() => {
-    axios.get(`https://backend.dstcracks.site/games/${gameId}`)
+    axios.get(`http://localhost:5000/games/${gameId}`)
       .then(response => {
         setGame(response.data);
       })
@@ -30,7 +30,7 @@ function GameDetail() {
   useEffect(() => {
     const token = Cookies.get('token');
     if (token) {
-      fetch('https://backend.dstcracks.site/user-info', {
+      fetch('http://localhost:5000/user-info', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -120,7 +120,7 @@ document.addEventListener('contextmenu', (event) => {
   }
 
   const handleImageUrl = (url) => {
-    const baseUrl = 'https://backend.dstcracks.site/';
+    const baseUrl = 'http://localhost:5000/';
     while (url.includes(baseUrl + baseUrl)) {
       url = url.replace(baseUrl, '');
     }
@@ -162,7 +162,7 @@ document.addEventListener('contextmenu', (event) => {
           <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
             {userAvatar ? (
               <>
-                <img draggable="false" src={`https://backend.dstcracks.site/${userAvatar}`} alt="Ảnh đại diện người dùng" style={{ width: '35px', height: '35px', borderRadius: '50%', cursor: 'pointer' }} onClick={handleAvatarClick} />
+                <img draggable="false" src={`http://localhost:5000/${userAvatar}`} alt="Ảnh đại diện người dùng" style={{ width: '35px', height: '35px', borderRadius: '50%', cursor: 'pointer' }} onClick={handleAvatarClick} />
                 <span style={{ marginLeft: '10px', fontSize: '14px', fontFamily: 'Quicksand, sans-serif', fontWeight: 'bold', cursor: 'pointer' }}>{username}</span> {/* Display the username */}
                 {showDropdown && (
                   <div style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: '#fff', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '10px', zIndex: 1, width: '100px' }}>

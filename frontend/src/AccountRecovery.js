@@ -76,7 +76,7 @@ function AccountRecovery() {
     }
 
     try {
-      const response = await fetch('https://backend.dstcracks.site/reset-recovered-password', {
+      const response = await fetch('http://localhost:5000/reset-recovered-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -172,7 +172,7 @@ function AccountRecovery() {
               </div>
               <div className="form-group">
                 <ReCAPTCHA
-                  sitekey="6LcWM5EqAAAAALjZNid2ubwYteboafM8T6cD-mI9"
+                  sitekey="6LdVAo0rAAAAAL1YQ5gO8rCLtxVjCgcF6hp2tZiv"
                   onChange={handleRecaptchaChange}
                   onExpired={handleRecaptchaExpired}
                 />

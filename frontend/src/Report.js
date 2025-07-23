@@ -39,7 +39,7 @@ document.addEventListener('contextmenu', (event) => {
   useEffect(() => {
     const token = Cookies.get('token');
     if (token) {
-      fetch('https://backend.dstcracks.site/user-info', {
+      fetch('http://localhost:5000/user-info', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -87,7 +87,7 @@ document.addEventListener('contextmenu', (event) => {
       formData.append('file', file);
     }
 
-    axios.post('https://backend.dstcracks.site/report', formData, {
+    axios.post('http://localhost:5000/report', formData, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'multipart/form-data'
@@ -165,7 +165,7 @@ document.addEventListener('contextmenu', (event) => {
           <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
             {userAvatar ? (
               <>
-                <img draggable="false" src={`https://backend.dstcracks.site/${userAvatar}`} alt="User Avatar" style={{ width: '35px', height: '35px', borderRadius: '50%', cursor: 'pointer' }} onClick={handleAvatarClick} />
+                <img draggable="false" src={`http://localhost:5000/${userAvatar}`} alt="User Avatar" style={{ width: '35px', height: '35px', borderRadius: '50%', cursor: 'pointer' }} onClick={handleAvatarClick} />
                 <span style={{ marginLeft: '10px', fontSize: '14px', fontFamily: 'Quicksand, sans-serif', fontWeight: 'bold', cursor: 'pointer' }}>{username}</span> {/* Display the username */}
                 {showDropdown && (
                   <div style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: '#fff', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '10px', zIndex: 1, width: '100px' }}>

@@ -137,7 +137,7 @@ document.addEventListener('contextmenu', (event) => {
     }
 
     setLoading(true); // Set loading to true when fetching data
-    fetch('https://backend.dstcracks.site/user-info', {
+    fetch('http://localhost:5000/user-info', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -150,7 +150,7 @@ document.addEventListener('contextmenu', (event) => {
       }
       Cookies.set('userId', data.id); // Store user ID in cookies
       Cookies.set('userRole', data.role); // Store user role in cookies
-      fetch('https://backend.dstcracks.site/admin/users', {
+      fetch('http://localhost:5000/admin/users', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -248,13 +248,13 @@ document.addEventListener('contextmenu', (event) => {
     // Fetch games when the selected menu is 'games'
     if (selectedMenu === 'games') {
       setLoading(true); // Set loading to true when fetching data
-      fetch('https://backend.dstcracks.site/games')
+      fetch('http://localhost:5000/games')
         .then(response => response.json())
         .then(data => {
           const correctedData = data.map(game => {
             let imageUrl = game.image_url;
-            if (imageUrl && imageUrl.startsWith('https://backend.dstcracks.site/https://backend.dstcracks.site/')) {
-              imageUrl = imageUrl.replace('https://backend.dstcracks.site/https://backend.dstcracks.site/', 'https://backend.dstcracks.site/');
+            if (imageUrl && imageUrl.startsWith('http://localhost:5000/http://localhost:5000/')) {
+              imageUrl = imageUrl.replace('http://localhost:5000/http://localhost:5000/', 'http://localhost:5000/');
             }
             return { ...game, image_url: imageUrl };
           });
@@ -275,7 +275,7 @@ document.addEventListener('contextmenu', (event) => {
 
   useEffect(() => {
     if (selectedGame && selectedGame !== 'new') {
-      fetch(`https://backend.dstcracks.site/games/${selectedGame}`, {
+      fetch(`http://localhost:5000/games/${selectedGame}`, {
         headers: {
           'Authorization': `Bearer ${Cookies.get('token')}`
         }
@@ -283,9 +283,9 @@ document.addEventListener('contextmenu', (event) => {
       .then(response => response.json())
       .then(data => {
         let imageUrl = data.image_url;
-        if (imageUrl && imageUrl.includes('https://backend.dstcracks.site/')) {
-          const parts = imageUrl.split('https://backend.dstcracks.site/');
-          imageUrl = 'https://backend.dstcracks.site/' + parts[parts.length - 1];
+        if (imageUrl && imageUrl.includes('http://localhost:5000/')) {
+          const parts = imageUrl.split('http://localhost:5000/');
+          imageUrl = 'http://localhost:5000/' + parts[parts.length - 1];
         }
         setGameDetails({
           ...data,
@@ -313,7 +313,7 @@ document.addEventListener('contextmenu', (event) => {
     if (selectedMenu === 'report') {
       const token = Cookies.get('token');
       setLoading(true); // Set loading to true when fetching data
-      fetch('https://backend.dstcracks.site/reports', {
+      fetch('http://localhost:5000/reports', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -359,7 +359,7 @@ document.addEventListener('contextmenu', (event) => {
       confirmButtonText: 'Xóa'
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://backend.dstcracks.site/admin/users/${userId}`, {
+        fetch(`http://localhost:5000/admin/users/${userId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -420,7 +420,7 @@ document.addEventListener('contextmenu', (event) => {
       confirmButtonText: isBanned ? 'Bỏ cấm' : 'Cấm'
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://backend.dstcracks.site/admin/users/${action}/${userId}`, {
+        fetch(`http://localhost:5000/admin/users/${action}/${userId}`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -465,7 +465,7 @@ document.addEventListener('contextmenu', (event) => {
       });
       return;
     }
-    fetch(`https://backend.dstcracks.site/admin/users/${userId}`, {
+    fetch(`http://localhost:5000/admin/users/${userId}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -526,7 +526,7 @@ document.addEventListener('contextmenu', (event) => {
               }).then((result) => {
                 if (result.isConfirmed) {
                   const { email, username, password } = result.value;
-                  fetch(`https://backend.dstcracks.site/admin/users/${userId}`, {
+                  fetch(`http://localhost:5000/admin/users/${userId}`, {
                     method: 'PUT',
                     headers: {
                       'Authorization': `Bearer ${token}`,
@@ -599,7 +599,7 @@ document.addEventListener('contextmenu', (event) => {
       cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://backend.dstcracks.site/admin/users/role/${userId}`, {
+        fetch(`http://localhost:5000/admin/users/role/${userId}`, {
           method: 'PUT',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -646,7 +646,7 @@ document.addEventListener('contextmenu', (event) => {
       confirmButtonText: 'Xóa'
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://backend.dstcracks.site/games/${gameId}`, {
+        fetch(`http://localhost:5000/games/${gameId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${Cookies.get('token')}`
@@ -681,7 +681,7 @@ document.addEventListener('contextmenu', (event) => {
   };
 
   const handleEditGame = (gameId) => {
-    fetch(`https://backend.dstcracks.site/games/${gameId}`, {
+    fetch(`http://localhost:5000/games/${gameId}`, {
       headers: {
         'Authorization': `Bearer ${Cookies.get('token')}`
       }
@@ -760,7 +760,7 @@ const handleSaveGame = () => {
     release_date: gameDetails.release_date // Ensure release_date is included
   };
 
-  const url = selectedGame === 'new' ? 'https://backend.dstcracks.site/games/new' : `https://backend.dstcracks.site/games/${selectedGame}`;
+  const url = selectedGame === 'new' ? 'http://localhost:5000/games/new' : `http://localhost:5000/games/${selectedGame}`;
   const method = selectedGame === 'new' ? 'POST' : 'PUT';
 
   setSaveLoading(true); // Set save loading to true when saving data
@@ -962,7 +962,7 @@ const handleSaveGame = () => {
 
   const handleViewDetails = (reportId) => {
     const token = Cookies.get('token');
-    fetch(`https://backend.dstcracks.site/reports/${reportId}`, {
+    fetch(`http://localhost:5000/reports/${reportId}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -988,7 +988,7 @@ const handleSaveGame = () => {
   const handleCompleteReport = (reportId) => {
     const token = Cookies.get('token');
     setSaveLoading(true); // Set save loading to true when saving data
-    fetch(`https://backend.dstcracks.site/reports/complete/${reportId}`, {
+    fetch(`http://localhost:5000/reports/complete/${reportId}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -1745,7 +1745,7 @@ const handleSaveGame = () => {
                         {selectedReport.image_videos && (
                           <div>
                             <p><strong>Hình ảnh/Video:</strong></p>
-                            <img draggable="false" src={`https://backend.dstcracks.site/${selectedReport.image_videos}`} alt="Report" style={{ maxWidth: '100%' }} />
+                            <img draggable="false" src={`http://localhost:5000/${selectedReport.image_videos}`} alt="Report" style={{ maxWidth: '100%' }} />
                           </div>
                         )}
                       </div>

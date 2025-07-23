@@ -30,7 +30,7 @@ document.addEventListener('contextmenu', (event) => {
   useEffect(() => {
     const verifyAccount = async () => {
       try {
-        const response = await fetch(`https://backend.dstcracks.site/verify/${token}`);
+        const response = await fetch(`http://localhost:5000/verify/${token}`);
         const data = await response.json();
         if (response.ok && data.verified) {
           setVerified(true); // Set verified to true on success

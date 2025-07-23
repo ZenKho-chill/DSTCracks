@@ -43,7 +43,7 @@ const server = http.createServer(app); // Create HTTP server
 const wss = new WebSocket.Server({ server }); // Create WebSocket server
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
-const DISCORD_TOKEN = 'MTMyMzIwNDUwNDUzMDg0NTY5OQ.G0KGh3.YQcS4CcW6-gOq9AEttbjJ-RqZLs6CGlYzZImkM';
+const DISCORD_TOKEN = 'MTM5NzU3MzM2MzUwOTEwMDc1NQ.G3QaJF.OQ5eCUXyCsK9fhwhMdASxt_2YquP7EPcf2QaUI';
 const LOG_CHANNEL_ID = '1323203413437055051';
 
 discordClient.once('ready', () => {
@@ -72,7 +72,7 @@ function formatTimestamp(date) {
 }
 
 const corsOptions = {
-  origin: ['https://dstcracks.site', 'https://backend.dstcracks.site'],
+  origin: ['http://localhost:3000', 'http://localhost:5000'],
   optionsSuccessStatus: 200
 };
 
@@ -82,7 +82,7 @@ app.use(bodyParser.json({ limit: '10mb' })); // Increase the limit to 10mb
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); // Increase the limit to 10mb
 app.use('/image', express.static(path.join(__dirname, 'image'))); // Serve static files correctly
 
-const allowedOrigins = ['https://dstcracks.site', 'https://www.dstcracks.site'];
+const allowedOrigins = ['http://localhost:3000', 'https://www.dstcracks.site'];
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;
@@ -127,7 +127,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'dstcracks'
+  database: 'games_crack_list'
 });
 
 db.connect((err) => {
@@ -205,7 +205,7 @@ app.get('/games/:id', (req, res) => {
       game.recommended_requirements = game.recommended_requirements ? boldKeywords(game.recommended_requirements.replace(/\n/g, '<br>')) : ''; // Replace newlines with <br> tags and bold keywords
       game.notes = game.notes ? game.notes.replace(/\n/g, '<br>') : ''; // Replace newlines with <br> tags
       game.category = game.category ? game.category.split(',') : [];
-      game.image_url = game.image_url ? `https://backend.dstcracks.site/${game.image_url}` : ''; // Ensure full URL
+      game.image_url = game.image_url ? `http://localhost:5000/${game.image_url}` : ''; // Ensure full URL
     } catch (parseError) {
       console.error('Error parsing JSON columns:', parseError);
       res.status(500).send('Lỗi máy chủ');
@@ -451,7 +451,7 @@ app.put('/games/:id', (req, res) => {
         const extension = image_url.split('.').pop();
         const newImageFilename = `${sanitizedFilename}.${extension}`;
         const newImagePath = path.join(__dirname, 'image/games-image', newImageFilename);
-        const oldImagePath = path.join(__dirname, image_url.replace('https://backend.dstcracks.site/', ''));
+        const oldImagePath = path.join(__dirname, image_url.replace('http://localhost:5000/', ''));
 
         fs.rename(oldImagePath, newImagePath, (err) => {
           if (err) {
@@ -517,7 +517,7 @@ async function sendVerificationEmail(email, verificationToken) {
       from: 'deathsquadteam98.com',
       to: email,
       subject: 'Kích hoạt tài khoản',
-      text: `Vui lòng kích hoạt tài khoản: https://dstcracks.site/verify/${verificationToken}`
+      text: `Vui lòng kích hoạt tài khoản: http://localhost:3000/verify/${verificationToken}`
     };
 
     const result = await transporter.sendMail(mailOptions);
@@ -579,7 +579,7 @@ async function sendEmailChangeNotification(oldEmail, newEmail, recoveryToken) {
       from: 'deathsquadteam98@gmail.com', // Ensure the sender email is correct
       to: oldEmail, // Correctly set the recipient email
       subject: 'Email đã được thay đổi',
-      text: `Email của bạn đã được thay đổi thành: ${newEmail}. Nếu bạn không thực hiện thay đổi này, vui lòng sử dụng liên kết sau để khôi phục tài khoản của bạn: https://dstcracks.site/recover/${recoveryToken}`
+      text: `Email của bạn đã được thay đổi thành: ${newEmail}. Nếu bạn không thực hiện thay đổi này, vui lòng sử dụng liên kết sau để khôi phục tài khoản của bạn: http://localhost:3000/recover/${recoveryToken}`
     };
 
     const result = await transporter.sendMail(mailOptions);
@@ -610,7 +610,7 @@ async function sendAccountRecoveryEmail(email, recoveryToken) {
       from: 'deathsquadteam98@gmail.com',
       to: email,
       subject: 'Account Recovery',
-      text: `Please use the following link to recover your account: https://dstcracks.site/recover/${recoveryToken}`
+      text: `Please use the following link to recover your account: http://localhost:3000/recover/${recoveryToken}`
     };
 
     const result = await transporter.sendMail(mailOptions);
@@ -826,7 +826,7 @@ app.post('/login', async (req, res) => {
   const { email, password, recaptchaToken } = req.body;
 
   // Verify reCAPTCHA token
-  const recaptchaSecret = '6LcWM5EqAAAAAEhzy8LXcnwBF7H-fK3OspAdZHYw';
+  const recaptchaSecret = '6LdVAo0rAAAAAEyM2kZACm_GLDb3hdsIunJbwzVw';
   try {
     const recaptchaResponse = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${recaptchaToken}`);
     if (!recaptchaResponse.data.success) {
@@ -1108,7 +1108,7 @@ app.post('/reset-recovered-password', async (req, res) => {
 });
 
 app.get('/recaptcha-site-key', (req, res) => {
-  const recaptchaSiteKey = '6LcWM5EqAAAAALjZNid2ubwYteboafM8T6cD-mI9';
+  const recaptchaSiteKey = '6LdVAo0rAAAAAL1YQ5gO8rCLtxVjCgcF6hp2tZiv';
   res.json({ siteKey: recaptchaSiteKey });
 });
 
@@ -1956,7 +1956,7 @@ app.put('/games/:id', (req, res) => {
         const extension = image_url.split('.').pop();
         const newImageFilename = `${sanitizedFilename}.${extension}`;
         const newImagePath = path.join(__dirname, 'image/games-image', newImageFilename);
-        const oldImagePath = path.join(__dirname, image_url.replace('https://backend.dstcracks.site/', ''));
+        const oldImagePath = path.join(__dirname, image_url.replace('http://localhost:5000/', ''));
 
         fs.rename(oldImagePath, newImagePath, (err) => {
           if (err) {
@@ -2023,7 +2023,7 @@ app.post('/report', upload.single('file'), (req, res) => {
           res.status(500).send({ message: 'Lỗi máy chủ' });
           return;
         }
-        const mediaUrl = file ? `https://backend.dstcracks.site/${file.path}` : null;
+        const mediaUrl = file ? `http://localhost:5000/${file.path}` : null;
         logNewReport(username, reportType, description, mediaUrl);
         res.status(200).send({ message: 'Gửi báo cáo thành công' });
       });

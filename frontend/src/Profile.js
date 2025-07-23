@@ -51,7 +51,7 @@ function Profile() {
   useEffect(() => {
     const token = Cookies.get('token');
     if (token) {
-      fetch('https://backend.dstcracks.site/user-info', {
+      fetch('http://localhost:5000/user-info', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -70,7 +70,7 @@ function Profile() {
     const urlParams = new URLSearchParams(window.location.search);
     const verificationToken = urlParams.get('token');
     if (verificationToken) {
-      fetch(`https://backend.dstcracks.site/verify/${verificationToken}`)
+      fetch(`http://localhost:5000/verify/${verificationToken}`)
         .then(response => response.json())
         .then(data => {
           if (data.verified && data.newEmail) {
@@ -142,7 +142,7 @@ function Profile() {
   const handleConfirm = async () => {
     const token = Cookies.get('token');
     try {
-      const response = await fetch('https://backend.dstcracks.site/update-avatar', {
+      const response = await fetch('http://localhost:5000/update-avatar', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -237,7 +237,7 @@ function Profile() {
       let emailChanged = false;
 
       if (newUsername) {
-        lastResponse = await fetch('https://backend.dstcracks.site/change-username', {
+        lastResponse = await fetch('http://localhost:5000/change-username', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -261,7 +261,7 @@ function Profile() {
       }
 
       if (newEmail) {
-        lastResponse = await fetch('https://backend.dstcracks.site/change-email', {
+        lastResponse = await fetch('http://localhost:5000/change-email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -286,7 +286,7 @@ function Profile() {
       }
 
       if (newPassword && currentPassword) {
-        lastResponse = await fetch('https://backend.dstcracks.site/change-password', {
+        lastResponse = await fetch('http://localhost:5000/change-password', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -371,7 +371,7 @@ function Profile() {
         <div style={{ width: '20%', height: '10%', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginRight: '50px', position: 'relative' }} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           {userAvatar ? (
             <>
-              <img draggable="false" src={`https://backend.dstcracks.site/${userAvatar}`} alt="User Avatar" style={{ width: '35px', height: '35px', borderRadius: '50%', cursor: 'pointer' }} onClick={handleAvatarClick} />
+              <img draggable="false" src={`http://localhost:5000/${userAvatar}`} alt="User Avatar" style={{ width: '35px', height: '35px', borderRadius: '50%', cursor: 'pointer' }} onClick={handleAvatarClick} />
               <span style={{ marginLeft: '10px', fontSize: '14px', fontFamily: 'Quicksand, sans-serif', fontWeight: 'bold' }}>{username}</span> {/* Display the username */}
               {showDropdown && (
                 <div style={{ position: 'absolute', top: '50px', right: '0', backgroundColor: '#fff', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '10px', zIndex: 1 }} onMouseEnter={handleDropdownMouseEnter} onMouseLeave={handleDropdownMouseLeave}>
@@ -538,7 +538,7 @@ function Profile() {
               <div className="author-card sidebar-card">
                 <div className="author-infos" style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '8px', width: '360px', height: '300px', textAlign: 'center', marginBottom: '0' }}>
                   <div className="author_avatar" onClick={handleAvatarClick} >
-                    <img draggable="false" src={selectedImage || (userAvatar && `https://backend.dstcracks.site/${userAvatar}`)} alt="User Avatar" style={{ width: '160px', height: '160px', borderRadius: '50%' }} />
+                    <img draggable="false" src={selectedImage || (userAvatar && `http://localhost:5000/${userAvatar}`)} alt="User Avatar" style={{ width: '160px', height: '160px', borderRadius: '50%' }} />
                     <FontAwesomeIcon icon={faEdit} className="edit-icon" />
                   </div>
                   <input type="file" id="fileInput" style={{ display: 'none' }} accept="image/*" onChange={handleImageChange} />
@@ -592,7 +592,7 @@ function Profile() {
                   </div>
                   <ReCAPTCHA
                     ref={recaptchaRef}
-                    sitekey="6LcWM5EqAAAAALjZNid2ubwYteboafM8T6cD-mI9" // Replace with your reCAPTCHA site key
+                    sitekey="6LdVAo0rAAAAAL1YQ5gO8rCLtxVjCgcF6hp2tZiv" // Replace with your reCAPTCHA site key
                     onChange={onRecaptchaChange}
                   />
                   <div className="button-group">

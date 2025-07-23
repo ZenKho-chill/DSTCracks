@@ -56,7 +56,7 @@ document.addEventListener('contextmenu', (event) => {
           const recaptchaElement = document.getElementById('recaptcha');
           if (recaptchaElement && !recaptchaElement.hasChildNodes()) {
             window.grecaptcha.render('recaptcha', {
-              sitekey: '6LcWM5EqAAAAALjZNid2ubwYteboafM8T6cD-mI9'
+              sitekey: '6LdVAo0rAAAAAL1YQ5gO8rCLtxVjCgcF6hp2tZiv'
             });
           }
         });
@@ -175,7 +175,7 @@ document.addEventListener('contextmenu', (event) => {
     });
 
     try {
-      const response = await fetch('https://backend.dstcracks.site/register', {
+      const response = await fetch('http://localhost:5000/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -194,7 +194,7 @@ document.addEventListener('contextmenu', (event) => {
         // Start checking verification status every 5 seconds
         const intervalId = setInterval(async () => {
           try {
-            const checkResponse = await fetch(`https://backend.dstcracks.site/check-verification/${email}`);
+            const checkResponse = await fetch(`http://localhost:5000/check-verification/${email}`);
             const data = await checkResponse.json();
             if (data.verified) {
               clearInterval(intervalId);
@@ -299,7 +299,7 @@ document.addEventListener('contextmenu', (event) => {
                 <span id="repasserrortxt" className="text-danger" style={{ color: 'red', float: 'right', marginBottom: '20px', display: 'none' }}></span>
                 <FontAwesomeIcon icon={showRePassword ? faEye : faEyeSlash } onClick={() => setShowRePassword(!showRePassword)} style={{ position: 'absolute', right: '10px', top: '35px', cursor: 'pointer' }} />
               </div>
-              <div className="g-recaptcha" id="recaptcha" data-sitekey="6LcWM5EqAAAAALjZNid2ubwYteboafM8T6cD-mI9" style={{ marginBottom: '20px' }}></div>
+              <div className="g-recaptcha" id="recaptcha" data-sitekey="6LdVAo0rAAAAAL1YQ5gO8rCLtxVjCgcF6hp2tZiv" style={{ marginBottom: '20px' }}></div>
               <button className="btn btn--xs register_btn" type="submit" style={{ padding: '10px', borderRadius: '5px', border: 'none', backgroundColor: '#0674ec', color: '#fff', cursor: 'pointer', width: '100%' }}>Đăng ký</button>
               <div className="login_assist" style={{ textAlign: 'center', marginTop: '20px' }}>
                 <p>Bạn đã có tài khoản thành viên ? <a href="/signin" onClick={(e) => { e.preventDefault(); navigate('/login'); }} style={{ textDecoration: 'none' }}>Đăng nhập</a></p>

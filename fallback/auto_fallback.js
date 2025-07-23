@@ -3,8 +3,8 @@ const axios = require("axios");
 const { spawn } = require("child_process");
 
 const CHECK_URLS = [
-    "https://backend.dstcracks.site/games",
-    "https://dstcracks.site"
+    "http://localhost:5000/games",
+    "http://localhost:3000"
 ];
 
 const CLOUDFLARE_API = "https://api.cloudflare.com/client/v4/zones/a3c9e25af30b8fc3d7e978637784b789/dns_records";
